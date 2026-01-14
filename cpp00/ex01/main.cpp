@@ -15,6 +15,8 @@
 #include <string>
 #include <cstring>
 #include "./main_header.hpp"
+#include "./PhoneBook.hpp"
+
 
 
 t_options choose_option()
@@ -45,6 +47,7 @@ t_options choose_option()
 int main()
 { 
     t_options options;
+    PhoneBook instance;
 
     std::cout << "Welcome to your phonebook!" << std::endl;
     while (1)
@@ -53,14 +56,14 @@ int main()
         switch (options)
         {
             case ADD:
-                std::cout << "escolhi add" << std::endl;
+                std::cout << "escolhi ADD" << std::endl;
                 continue;
             case SEARCH:
                 std::cout << "escolhi SEARCH" << std::endl;
                 continue;
             case EXIT:
                 std::cout << "escolhi EXIT" << std::endl;
-                continue;
+                return(0);
             default:
                 std::cout << "escolhi nada" << std::endl;
                 continue;

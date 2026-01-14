@@ -19,7 +19,7 @@ FLAGS =-Wall	\
 
 CC= c++
 
-C_SOURCE= main.cpp
+C_SOURCE= main.cpp PhoneBook.cpp
 
 all: $(NAME)
 
