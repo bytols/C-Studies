@@ -6,11 +6,11 @@
 #    By: erocha-l <erocha-l@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/10 18:24:23 by erocha-l          #+#    #+#              #
-#    Updated: 2026/01/18 09:39:21 by erocha-l         ###   ########.fr        #
+#    Updated: 2026/01/19 13:52:00 by erocha-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =  uviolence
+NAME =  fileTest
 
 FLAGS =-Wall	\
        -Werror  \
@@ -19,12 +19,12 @@ FLAGS =-Wall	\
 
 CC= c++
 
-C_SOURCE= main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+C_SOURCE= main.cpp
 
 all: $(NAME)
 
 $(NAME): $(C_SOURCE)
-	$(CC) $(FLAGS) $(C_SOURCE) -o uviolence
+	$(CC) $(FLAGS) $(C_SOURCE) -o fileTest
 
 re: $(NAME)
 	make fclean

@@ -6,7 +6,7 @@
 /*   By: erocha-l <erocha-l@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:36:49 by erocha-l          #+#    #+#             */
-/*   Updated: 2026/01/18 21:00:59 by erocha-l         ###   ########.fr       */
+/*   Updated: 2026/01/19 14:48:17 by erocha-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,63 @@
 #include <iostream>
 #include <fstream>
 
-int     check_if_is_match(std::string start, std::string match, int str_len,)
-{
-    
-}
-
 void    swap_string(std::ifstream &file,  std::ofstream &copyf,std::string find, std::string replace)
 {
     std::string line;
-    int len = find.size();
-    
+    if (find.empty())
+    {
+        while (std::getline(file, line))
+        {
+            copyf << line;
+            if (!file.eof())
+                copyf << std::endl;
+        }
+        if (file.eof())
+            std::cout << "Reached end of file." << std::endl;
+        else
+            std::cerr << "Error: File reading failed!" << std::endl;
+        return;
+    }
     while (std::getline(file, line))
     {
-        int not_found = 0;
-        while(not_found == 0)
+        size_t pos = 0;
+        while(true)
         {
-            line.find(find, len);
+            pos = line.find(find, pos);
+            if (pos == std::string::npos)
+                break ;
+            line.erase(pos, find.length());
+            line.insert(pos, replace);
+            pos += replace.length();
         }
+        copyf << line;
+        if (!file.eof())
+            copyf << std::endl;
     }
+    if (file.eof())
+        std::cout << "Reached end of file." << std::endl;
+    else
+        std::cerr << "Error: File reading failed!" << std::endl;
     return ;
 }
 
 int main(int argc, char *argv[])
 {
     if (argc != 4)
-        return ;
+        return (0);
     
-    std::ofstream cpyfile(std::string(argv[1]) +".filename");
+    std::string match(argv[2]);
+    std::string replace(argv[3]);
+    std::string filename = (std::string)argv[1] + ".replace";
     std::ifstream file(argv[1]);
     if ((!file.is_open()))
     {
         std::cerr << "error opening the file!" << std::endl; //check for other error are been writing in the right stream
-        return ;
+        return (0);
     }
-    swap_string(file, cpyfile, argv[2], argv[3]);
+    std::ofstream cpyfile(filename.c_str());
+    swap_string(file, cpyfile, match, replace);
     file.close();
+    cpyfile.close();
     return (0);
 }
